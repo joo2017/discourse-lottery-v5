@@ -233,7 +233,7 @@ export default class LotteryWidget extends Component {
                   {{I18n.t "lottery.leave.button"}}
                 </DButton>
               </div>
-            {{else if (not this.currentUser)}}
+            {{else unless this.currentUser}}
               <DButton
                 @action={{this.showLogin}}
                 @icon="sign-in-alt"
