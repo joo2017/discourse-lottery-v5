@@ -1,26 +1,25 @@
-# frozen_string_literal: true
-
+# app/models/lottery_participant.rb
 class LotteryParticipant < ActiveRecord::Base
   belongs_to :lottery
   belongs_to :user
+  belongs_to :post, optional: true
   
-  validates :lottery_id, presence: true
-  validates :user_id, presence: true
-  validates :lottery_id, uniqueness: { scope: :user_id }
+  validates :user_id, uniqueness: { scope: :lottery_id }
   
-  scope :valid_participants, -> { joins(:user).where(users: { active: true, staged: false }) }
+  scope :by_lottery, ->(lottery) { where(lottery: lottery) }
+end
+
+# app/models/lottery_winner.rb  
+class LotteryWinner < ActiveRecord::Base
+  belongs_to :lottery
+  belongs_to :user
+  belongs_to :lottery_participant, optional: true
   
-  before_create :set_participated_at
-  after_create :update_participant_count
-  after_destroy :update_participant_count
+  enum :prize_status, {
+    pending: 0,      # 待领取
+    claimed: 1,      # 已领取
+    expired: 2       # 已过期
+  }, default: :pending
   
-  private
-  
-  def set_participated_at
-    self.participated_at = Time.current
-  end
-  
-  def update_participant_count
-    lottery.update_column(:participant_count, lottery.lottery_participants.count)
-  end
+  validates :position, presence: true, uniqueness: { scope: :lottery_id }
 end
