@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { action } from "@ember/object";
+import { action, fn } from "@ember/object";
+import { on } from "@ember/modifier";
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
@@ -66,7 +67,8 @@ export default class LotteryEntryForm extends Component {
   }
   
   @action
-  updateSpecificPosts(value) {
+  updateSpecificPosts(event) {
+    const value = event.target.value;
     this.specificPosts = value;
     
     // 自动计算获奖人数
@@ -85,7 +87,8 @@ export default class LotteryEntryForm extends Component {
   }
   
   @action
-  async submit() {
+  async submit(event) {
+    event.preventDefault();
     this.errors = {};
     
     if (!this.validate()) {
@@ -170,7 +173,7 @@ export default class LotteryEntryForm extends Component {
 
   <template>
     <div class="lottery-entry-form">
-      <form {{on "submit" (fn this.submit)}}>
+      <form {{on "submit" this.submit}}>
         {{#if this.errors.general}}
           <div class="alert alert-error">
             {{this.errors.general}}
@@ -220,7 +223,7 @@ export default class LotteryEntryForm extends Component {
             />
           </div>
           
-          {{#if (not this.isSpecificPostsDraw)}}
+          {{#unless this.isSpecificPostsDraw}}
             <div class="form-group">
               <label for="lottery-winner-count">{{I18n.t "lottery.form.winner_count"}} <span class="required">*</span></label>
               <TextField
@@ -234,7 +237,7 @@ export default class LotteryEntryForm extends Component {
                 <div class="error-message">{{this.errors.winnerCount}}</div>
               {{/if}}
             </div>
-          {{/if}}
+          {{/unless}}
         </div>
         
         {{#if this.isSpecificPostsDraw}}
@@ -244,7 +247,7 @@ export default class LotteryEntryForm extends Component {
               @value={{this.specificPosts}}
               @placeholderKey="lottery.form.specific_posts_placeholder"
               id="lottery-specific-posts"
-              {{on "input" (fn this.updateSpecificPosts)}}
+              {{on "input" this.updateSpecificPosts}}
             />
             <div class="help-text">
               {{I18n.t "lottery.form.specific_posts_help"}}
