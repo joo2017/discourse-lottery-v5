@@ -1,3 +1,4 @@
+// assets/javascripts/discourse/components/lottery-widget.gjs
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
@@ -214,7 +215,7 @@ export default class LotteryWidget extends Component {
               <DButton
                 @action={{this.participate}}
                 @disabled={{this.loading}}
-                @icon="ticket-alt"
+                @icon="gift"
                 class="btn-primary participate-btn"
               >
                 {{I18n.t "lottery.participate.button"}}
