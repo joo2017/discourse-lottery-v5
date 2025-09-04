@@ -1,0 +1,333 @@
+// 移动端专用样式
+.lottery-widget {
+  // 移动端减小内边距
+  padding: 12px;
+  margin: 12px 0;
+  
+  .lottery-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    
+    .lottery-title {
+      font-size: 1.1em;
+      line-height: 1.3;
+    }
+    
+    .status-badge {
+      align-self: flex-end;
+      font-size: 0.8em;
+    }
+  }
+  
+  .lottery-details {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: var(--secondary-very-low);
+      border-radius: 4px;
+    }
+  }
+  
+  .lottery-actions {
+    flex-direction: column;
+    gap: 12px;
+    
+    .participate-btn {
+      width: 100%;
+      max-width: none;
+      padding: 14px;
+      font-size: 1.1em;
+      min-height: 48px; // 触摸友好
+    }
+    
+    .participated-status {
+      width: 100%;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+      
+      .participated-text {
+        padding: 12px;
+        background: var(--success-low);
+        color: var(--success);
+        border-radius: 6px;
+        font-size: 1em;
+      }
+      
+      .leave-btn {
+        width: 100%;
+        min-height: 44px;
+      }
+    }
+    
+    .cannot-participate {
+      text-align: center;
+      padding: 12px;
+      font-size: 1em;
+    }
+  }
+}
+
+// 移动端倒计时优化
+.lottery-countdown {
+  flex-direction: column;
+  text-align: center;
+  padding: 16px 12px;
+  
+  .countdown-icon {
+    font-size: 1.8em;
+    margin-bottom: 8px;
+  }
+  
+  .countdown-text {
+    .time-display {
+      display: block;
+      font-size: 1.3em;
+      margin-top: 4px;
+      margin-left: 0;
+    }
+  }
+}
+
+// 移动端表单优化
+.lottery-entry-form {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .form-group {
+    input, textarea, select {
+      padding: 14px 12px;
+      font-size: 16px; // 防止iOS缩放
+      min-height: 48px;
+    }
+    
+    label {
+      font-size: 1em;
+      margin-bottom: 8px;
+    }
+    
+    .help-text {
+      font-size: 0.9em;
+      margin-top: 6px;
+    }
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    
+    .btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.1em;
+      min-height: 48px;
+    }
+  }
+  
+  // 移动端特定输入优化
+  input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  
+  input[type="datetime-local"] {
+    min-height: 48px;
+  }
+}
+
+// 移动端结果展示
+.lottery-results {
+  .winners-list {
+    .winner-item {
+      flex-direction: column;
+      text-align: center;
+      padding: 16px 12px;
+      gap: 8px;
+      
+      .winner-emoji {
+        font-size: 2.5em;
+        margin-bottom: 8px;
+      }
+      
+      .winner-info {
+        width: 100%;
+        text-align: center;
+        
+        .winner-position {
+          font-size: 1.2em;
+          margin-bottom: 8px;
+        }
+        
+        .winner-user {
+          margin-bottom: 8px;
+          font-size: 1.1em;
+        }
+        
+        .winner-time {
+          font-size: 0.9em;
+        }
+      }
+    }
+  }
+  
+  .verification-info {
+    details {
+      summary {
+        padding: 12px 8px;
+        font-size: 1em;
+        touch-action: manipulation; // 防止双击缩放
+      }
+      
+      .verification-content {
+        padding: 12px 8px;
+        
+        .verification-data {
+          font-size: 0.85em;
+          line-height: 1.5;
+          word-break: break-all;
+        }
+      }
+    }
+  }
+}
+
+// 移动端模态框
+.lottery-create-modal {
+  .modal-inner-container {
+    width: 95vw;
+    max-height: 90vh;
+    margin: 20px auto;
+  }
+  
+  .modal-header {
+    padding: 16px;
+    
+    h3 {
+      font-size: 1.2em;
+    }
+    
+    .modal-close {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+  
+  .modal-body {
+    padding: 0 16px 16px;
+    max-height: calc(90vh - 80px);
+  }
+}
+
+// 移动端触摸优化
+.lottery-widget {
+  // 增大可触摸区域
+  .btn, button {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+  
+  // 防止文本选择
+  .lottery-title,
+  .status-badge,
+  .countdown-text {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+// 移动端进度条
+.lottery-progress {
+  .progress-bar {
+    height: 10px;
+    border-radius: 5px;
+  }
+  
+  .progress-text {
+    font-size: 1em;
+    margin-top: 8px;
+  }
+}
+
+// 移动端滚动优化
+.lottery-entry-form,
+.lottery-results {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+// 移动端焦点状态
+.lottery-entry-form {
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+}
+
+// 移动端横屏适配
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .lottery-create-modal {
+    .modal-inner-container {
+      max-height: 95vh;
+    }
+    
+    .modal-body {
+      max-height: calc(95vh - 60px);
+    }
+  }
+  
+  .lottery-countdown {
+    flex-direction: row;
+    text-align: left;
+    
+    .countdown-icon {
+      margin-bottom: 0;
+      margin-right: 12px;
+    }
+    
+    .countdown-text .time-display {
+      display: inline;
+      margin-top: 0;
+      margin-left: 8px;
+    }
+  }
+}
+
+// 移动端小屏幕优化
+@media screen and (max-width: 360px) {
+  .lottery-widget {
+    padding: 10px;
+    font-size: 0.95em;
+    
+    .lottery-title {
+      font-size: 1em;
+    }
+  }
+  
+  .lottery-entry-form {
+    .form-group {
+      margin-bottom: 14px;
+    }
+    
+    .form-actions .btn {
+      padding: 14px 12px;
+    }
+  }
+}
