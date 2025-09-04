@@ -192,3 +192,324 @@
   
   .countdown-text {
     flex: 1;
+    
+    .time-display {
+      font-family: monospace;
+      font-weight: bold;
+      margin-left: 8px;
+      
+      .urgent & {
+        color: var(--danger);
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+// 抽奖结果样式
+.lottery-results {
+  .results-header {
+    text-align: center;
+    margin-bottom: 20px;
+    
+    h4 {
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    
+    .results-summary {
+      color: var(--primary-medium);
+      font-size: 0.9em;
+    }
+  }
+  
+  .winner-congratulations {
+    background: var(--success-low);
+    color: var(--success);
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 16px;
+    border: 1px solid var(--success-medium);
+  }
+  
+  .winners-list {
+    .winner-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--secondary-very-low);
+      border: 1px solid var(--primary-low);
+      
+      &.position-1 {
+        background: linear-gradient(45deg, #ffd70020, #ffffe020);
+        border-color: #ffd700;
+      }
+      
+      &.position-2 {
+        background: linear-gradient(45deg, #c0c0c020, #ffffff20);
+        border-color: #c0c0c0;
+      }
+      
+      &.position-3 {
+        background: linear-gradient(45deg, #cd7f3220, #ffa50020);
+        border-color: #cd7f32;
+      }
+      
+      .winner-emoji {
+        font-size: 1.5em;
+      }
+      
+      .winner-info {
+        flex: 1;
+        
+        .winner-position {
+          font-weight: bold;
+          color: var(--primary);
+          margin-bottom: 4px;
+        }
+        
+        .winner-user {
+          margin-bottom: 4px;
+        }
+        
+        .winner-time {
+          font-size: 0.85em;
+          color: var(--primary-medium);
+        }
+      }
+    }
+  }
+  
+  .no-winners {
+    text-align: center;
+    padding: 20px;
+    color: var(--primary-medium);
+    font-style: italic;
+  }
+  
+  .verification-info {
+    margin-top: 20px;
+    border-top: 1px solid var(--primary-low);
+    padding-top: 16px;
+    
+    details {
+      summary {
+        cursor: pointer;
+        color: var(--tertiary);
+        font-weight: 500;
+        padding: 4px 0;
+        
+        &:hover {
+          color: var(--tertiary-hover);
+        }
+      }
+      
+      .verification-content {
+        margin-top: 12px;
+        font-size: 0.9em;
+        color: var(--primary-medium);
+        
+        .verification-data {
+          background: var(--secondary-very-low);
+          padding: 12px;
+          border-radius: 4px;
+          font-family: monospace;
+          margin-top: 8px;
+          border: 1px solid var(--primary-low);
+        }
+      }
+    }
+  }
+}
+
+// 抽奖创建表单样式
+.lottery-create-modal {
+  .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+
+.lottery-entry-form {
+  .form-group {
+    margin-bottom: 16px;
+    
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--primary);
+      
+      .required {
+        color: var(--danger);
+      }
+    }
+    
+    input, textarea, select {
+      width: 100%;
+    }
+    
+    .help-text {
+      font-size: 0.85em;
+      color: var(--primary-medium);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    
+    .error-message {
+      color: var(--danger);
+      font-size: 0.85em;
+      margin-top: 4px;
+    }
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .form-info {
+    background: var(--tertiary-low);
+    color: var(--tertiary);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-bottom: 12px;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--primary-low);
+  }
+  
+  .alert {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    
+    &.alert-error {
+      background: var(--danger-low);
+      color: var(--danger);
+      border: 1px solid var(--danger-medium);
+    }
+  }
+}
+
+// 状态指示器
+.lottery-status {
+  &.lottery-status-active {
+    .lottery-widget {
+      border-left: 4px solid var(--success);
+    }
+  }
+  
+  &.lottery-status-completed {
+    .lottery-widget {
+      border-left: 4px solid var(--tertiary);
+    }
+  }
+  
+  &.lottery-status-cancelled {
+    .lottery-widget {
+      border-left: 4px solid var(--danger);
+      opacity: 0.8;
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .lottery-widget {
+    padding: 12px;
+    
+    .lottery-details {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    
+    .lottery-actions {
+      flex-direction: column;
+      
+      .participate-btn {
+        max-width: none;
+      }
+      
+      .participated-status {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+  }
+  
+  .lottery-entry-form {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+  
+  .lottery-results {
+    .winner-item {
+      flex-direction: column;
+      text-align: center;
+      
+      .winner-info {
+        text-align: center;
+      }
+    }
+  }
+}
+
+// 暗色主题适配
+.theme-dark {
+  .lottery-widget {
+    background: var(--secondary-low);
+    border-color: var(--primary-medium);
+  }
+  
+  .lottery-countdown {
+    &.normal {
+      background: var(--secondary-low);
+    }
+  }
+  
+  .lottery-results {
+    .winner-item {
+      background: var(--secondary-low);
+      
+      &.position-1 {
+        background: linear-gradient(45deg, #ffd70010, #ffffe010);
+      }
+      
+      &.position-2 {
+        background: linear-gradient(45deg, #c0c0c010, #ffffff10);
+      }
+      
+      &.position-3 {
+        background: linear-gradient(45deg, #cd7f3210, #ffa50010);
+      }
+    }
+  }
+}
