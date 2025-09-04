@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class CreateLotteryParticipants < ActiveRecord::Migration[7.0]
-  def change
+  def up
+    return if table_exists?(:lottery_participants)
+    
     create_table :lottery_participants do |t|
       t.references :lottery, null: false, foreign_key: true, index: true
       t.references :user, null: false, foreign_key: true, index: true
@@ -14,5 +16,9 @@ class CreateLotteryParticipants < ActiveRecord::Migration[7.0]
       t.index [:user_id, :participated_at]
       t.index :ip_address
     end
+  end
+  
+  def down
+    drop_table :lottery_participants if table_exists?(:lottery_participants)
   end
 end
