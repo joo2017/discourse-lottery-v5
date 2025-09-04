@@ -1,0 +1,189 @@
+zh_CN:
+  js:
+    lottery:
+      title: "抽奖"
+      
+      status:
+        active: "进行中"
+        completed: "已完成"
+        cancelled: "已取消"
+      
+      form:
+        title: "抽奖标题"
+        title_placeholder: "输入抽奖活动标题"
+        description: "活动描述"
+        description_placeholder: "描述抽奖活动详情（可选）"
+        prize_info: "奖品信息"
+        prize_info_placeholder: "描述奖品内容"
+        draw_type: "抽奖方式"
+        winner_count: "中奖人数"
+        specific_posts: "指定楼层"
+        specific_posts_placeholder: "输入楼层号，用逗号分隔，如：5,10,15"
+        specific_posts_help: "填写此项将从指定楼层的发帖用户中选择获奖者"
+        min_participants: "最低参与人数"
+        min_participants_help: "最少需要 %{min} 人参与才能开奖"
+        strategy_when_insufficient: "人数不足时"
+        end_time: "截止时间"
+        create: "创建抽奖"
+        cancel: "取消"
+        calculated_winners: "将从指定楼层选择 %{count} 位获奖者"
+      
+      draw_type:
+        random: "随机抽取"
+        specific_posts: "指定楼层"
+      
+      strategy:
+        cancel: "取消抽奖"
+        proceed: "继续抽奖"
+      
+      create:
+        title: "创建抽奖"
+        button: "创建抽奖"
+        success: "抽奖创建成功！"
+      
+      participate:
+        button: "参与抽奖"
+        success: "参与成功！"
+        already_participated: "您已参与此次抽奖"
+      
+      leave:
+        button: "退出"
+        success: "已退出抽奖"
+        not_participating: "您尚未参与此次抽奖"
+      
+      countdown:
+        label: "剩余时间"
+        expired: "已截止"
+        format_days: "%{days}天 %{hours}小时 %{minutes}分钟"
+        format_hours: "%{hours}小时 %{minutes}分钟 %{seconds}秒"
+        format_minutes: "%{minutes}分钟 %{seconds}秒"
+      
+      results:
+        title: "🎉 开奖结果"
+        summary:
+          one: "共 1 位获奖者"
+          other: "共 %{count} 位获奖者"
+        position: "第 %{position} 名"
+        congratulations: "恭喜您获得第 %{position} 名！"
+        drawn_at: "开奖时间："
+        no_winners: "暂无获奖者"
+        verification_title: "抽奖验证信息"
+        verification_desc: "此次抽奖使用可验证的随机算法，确保公平公正。"
+        lottery_id: "抽奖ID"
+        draw_time: "开奖时间"
+        participant_count: "参与人数"
+        draw_method: "抽奖方式"
+        announcement: |
+          ## 🎉 【%{lottery_title}】开奖结果公布
+
+          恭喜以下 %{winner_count} 位用户获奖：
+
+          %{winners}
+
+          感谢大家的参与！
+      
+      progress: "%{count} / %{min} 人参与"
+      participants: "参与者"
+      winner_count: "中奖人数"
+      prize_info: "奖品信息"
+      
+      cannot_participate: "无法参与此次抽奖"
+      login_required: "登录后参与"
+      no_lottery: "暂无抽奖活动"
+      
+      cancelled:
+        message: "抽奖已取消（参与人数不足）"
+      
+      errors:
+        title_required: "请输入抽奖标题"
+        winner_count_invalid: "中奖人数必须大于0"
+        min_participants_too_low: "最低参与人数不能少于 %{min} 人"
+        end_time_required: "请设置截止时间"
+        end_time_must_be_future: "截止时间必须晚于当前时间"
+        specific_posts_required: "请输入指定楼层"
+        specific_posts_format: "楼层号格式不正确，请输入数字，用逗号分隔"
+        cannot_participate: "无法参与此次抽奖"
+        creation_failed: "抽奖创建失败"
+        winner_count_exceeds_participants: "中奖人数不能超过最低参与人数"
+        invalid_post_format: "楼层号格式不正确"
+        invalid_time_format: "时间格式不正确"
+        insufficient_trust_level: "您的信任等级不足，需要达到 %{required} 级"
+        too_many_active_lotteries: "您同时进行的抽奖过多，最多允许 %{max} 个"
+      
+      composer:
+        add_lottery: "添加抽奖"
+      
+      menu:
+        my_lotteries: "我的抽奖"
+      
+      pm:
+        winner_title: "🎉 恭喜中奖！"
+        winner_body: |
+          恭喜您在抽奖活动「%{lottery_title}」中获得第 %{position} 名！
+
+          点击查看详情：%{topic_url}
+
+          祝您好运！
+      
+      admin:
+        title: "抽奖管理"
+        nav_label: "抽奖"
+        
+        settings:
+          enabled: "启用抽奖功能"
+          enabled_help: "是否允许用户创建和参与抽奖"
+          min_participants_global: "全局最低参与人数"
+          min_participants_global_help: "所有抽奖的最低参与人数限制"
+          post_lock_delay_minutes: "帖子锁定延迟（分钟）"
+          post_lock_delay_minutes_help: "抽奖创建后多久锁定主楼层，0表示立即锁定"
+          excluded_groups: "排除的用户组"
+          excluded_groups_help: "选择不能参与抽奖的用户组"
+          cleanup_old_data: "清理旧数据"
+          cleanup_old_data_help: "是否自动清理超过1年的已完成抽奖数据"
+          max_active_per_user: "每用户最大活跃抽奖数"
+          max_active_per_user_help: "单个用户同时可以进行的抽奖活动数量上限"
+          require_trust_level: "创建抽奖所需信任等级"
+          require_trust_level_help: "用户需要达到此信任等级才能创建抽奖"
+          allow_anonymous_participation: "允许匿名参与"
+          allow_anonymous_participation_help: "是否允许匿名用户参与抽奖"
+        
+        dashboard:
+          total_lotteries: "总抽奖数"
+          active_lotteries: "进行中"
+          completed_lotteries: "已完成"
+          total_participants: "总参与人次"
+          average_participants: "平均参与人数"
+          success_rate: "成功开奖率"
+        
+        list:
+          title: "抽奖列表"
+          id: "ID"
+          title_col: "标题"
+          status: "状态"
+          creator: "创建者"
+          participants: "参与者"
+          winners: "获奖者"
+          created_at: "创建时间"
+          end_time: "截止时间"
+          actions: "操作"
+          view: "查看"
+          edit: "编辑"
+          delete: "删除"
+          draw_now: "立即开奖"
+          cancel: "取消抽奖"
+          confirm_delete: "确定删除这个抽奖吗？此操作不可撤销。"
+          confirm_cancel: "确定取消这个抽奖吗？"
+          confirm_draw: "确定立即开奖吗？"
+          
+        filters:
+          all: "全部"
+          active: "进行中"
+          completed: "已完成"
+          cancelled: "已取消"
+          expired: "已过期"
+          
+        bulk_actions:
+          select_all: "全选"
+          delete_selected: "删除选中"
+          cancel_selected: "取消选中"
+          export_csv: "导出CSV"
