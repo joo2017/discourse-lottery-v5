@@ -1,0 +1,90 @@
+lottery:
+  lottery_enabled:
+    type: bool
+    default: true
+    client: true
+    description: "Enable lottery functionality"
+    
+  lottery_min_participants_global:
+    type: integer
+    default: 5
+    min: 1
+    max: 1000
+    client: true
+    description: "Global minimum participants required for any lottery"
+    
+  lottery_post_lock_delay_minutes:
+    type: integer
+    default: 60
+    min: 0
+    max: 10080
+    description: "Minutes after lottery creation before the post is locked (0 = immediate)"
+    
+  lottery_excluded_groups:
+    type: group_list
+    default: "staff"
+    description: "User groups excluded from participating in lotteries"
+    
+  lottery_cleanup_old_data:
+    type: bool
+    default: false
+    description: "Automatically cleanup lottery data older than 1 year"
+    
+  lottery_max_active_per_user:
+    type: integer
+    default: 5
+    min: 1
+    max: 50
+    description: "Maximum number of active lotteries per user"
+    
+  lottery_require_trust_level:
+    type: integer
+    default: 0
+    min: 0
+    max: 4
+    description: "Minimum trust level required to create lotteries"
+    
+  lottery_allow_anonymous_participation:
+    type: bool
+    default: false
+    description: "Allow anonymous users to participate in lotteries"
+    
+  lottery_notification_level:
+    type: enum
+    default: "all"
+    choices:
+      - none
+      - winners_only
+      - all
+    description: "Who receives lottery notifications"
+    
+  lottery_auto_close_topics:
+    type: bool
+    default: true
+    description: "Automatically close lottery topics after completion"
+    
+  lottery_enable_verification:
+    type: bool
+    default: true
+    description: "Enable lottery draw verification features"
+    
+  lottery_max_concurrent_draws:
+    type: integer
+    default: 10
+    min: 1
+    max: 100
+    description: "Maximum number of concurrent lottery draws"
+    
+  lottery_rate_limit_creates:
+    type: integer
+    default: 3
+    min: 1
+    max: 50
+    description: "Maximum lottery creations per user per day"
+    
+  lottery_rate_limit_participations:
+    type: integer
+    default: 50
+    min: 1
+    max: 500
+    description: "Maximum lottery participations per user per day"
