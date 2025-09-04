@@ -54,6 +54,10 @@ export default class LotteryEntryForm extends Component {
            !this.loading;
   }
   
+  get cannotSubmit() {
+    return !this.canSubmit;
+  }
+  
   get minParticipantsMin() {
     return this.siteSettings.lottery_min_participants_global || 1;
   }
@@ -135,6 +139,41 @@ export default class LotteryEntryForm extends Component {
     this.args.onCancel?.();
   }
   
+  @action
+  updateTitle(value) {
+    this.title = value;
+  }
+  
+  @action
+  updateDescription(value) {
+    this.description = value;
+  }
+  
+  @action
+  updatePrizeInfo(value) {
+    this.prizeInfo = value;
+  }
+  
+  @action
+  updateWinnerCount(value) {
+    this.winnerCount = parseInt(value) || 1;
+  }
+  
+  @action
+  updateMinParticipants(value) {
+    this.minParticipants = parseInt(value) || this.minParticipantsMin;
+  }
+  
+  @action
+  updateEndTime(value) {
+    this.endTime = value;
+  }
+  
+  @action
+  updateStrategyWhenInsufficient(value) {
+    this.strategyWhenInsufficient = value;
+  }
+  
   validate() {
     const errors = {};
     
@@ -184,6 +223,7 @@ export default class LotteryEntryForm extends Component {
           <label for="lottery-title">{{I18n.t "lottery.form.title"}} <span class="required">*</span></label>
           <TextField
             @value={{this.title}}
+            @input={{this.updateTitle}}
             @placeholderKey="lottery.form.title_placeholder"
             id="lottery-title"
             maxlength="255"
@@ -197,6 +237,7 @@ export default class LotteryEntryForm extends Component {
           <label for="lottery-description">{{I18n.t "lottery.form.description"}}</label>
           <Textarea
             @value={{this.description}}
+            @input={{this.updateDescription}}
             @placeholderKey="lottery.form.description_placeholder"
             id="lottery-description"
             rows="3"
@@ -207,6 +248,7 @@ export default class LotteryEntryForm extends Component {
           <label for="lottery-prize-info">{{I18n.t "lottery.form.prize_info"}}</label>
           <TextField
             @value={{this.prizeInfo}}
+            @input={{this.updatePrizeInfo}}
             @placeholderKey="lottery.form.prize_info_placeholder"
             id="lottery-prize-info"
           />
@@ -228,6 +270,7 @@ export default class LotteryEntryForm extends Component {
               <label for="lottery-winner-count">{{I18n.t "lottery.form.winner_count"}} <span class="required">*</span></label>
               <TextField
                 @value={{this.winnerCount}}
+                @input={{this.updateWinnerCount}}
                 @type="number"
                 min="1"
                 max="50"
@@ -269,6 +312,7 @@ export default class LotteryEntryForm extends Component {
             <label for="lottery-min-participants">{{I18n.t "lottery.form.min_participants"}} <span class="required">*</span></label>
             <TextField
               @value={{this.minParticipants}}
+              @input={{this.updateMinParticipants}}
               @type="number"
               min={{this.minParticipantsMin}}
               max="1000"
@@ -288,7 +332,7 @@ export default class LotteryEntryForm extends Component {
             <ComboBox
               @value={{this.strategyWhenInsufficient}}
               @content={{this.strategyOptions}}
-              @onChange={{fn (mut this.strategyWhenInsufficient)}}
+              @onChange={{this.updateStrategyWhenInsufficient}}
               id="lottery-strategy"
             />
           </div>
@@ -298,7 +342,7 @@ export default class LotteryEntryForm extends Component {
           <label for="lottery-end-time">{{I18n.t "lottery.form.end_time"}} <span class="required">*</span></label>
           <DateTimeInput
             @date={{this.endTime}}
-            @onChange={{fn (mut this.endTime)}}
+            @onChange={{this.updateEndTime}}
             id="lottery-end-time"
           />
           {{#if this.errors.endTime}}
@@ -309,7 +353,7 @@ export default class LotteryEntryForm extends Component {
         <div class="form-actions">
           <DButton
             @action={{this.submit}}
-            @disabled={{not this.canSubmit}}
+            @disabled={{this.cannotSubmit}}
             @icon="plus"
             class="btn-primary"
             type="submit"
