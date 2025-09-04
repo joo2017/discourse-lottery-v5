@@ -1,0 +1,104 @@
+zh_CN:
+  site_settings:
+    lottery_enabled: "启用抽奖功能"
+    lottery_min_participants_global: "全局最低参与人数"
+    lottery_post_lock_delay_minutes: "帖子锁定延迟（分钟）"
+    lottery_excluded_groups: "排除的用户组"
+    lottery_cleanup_old_data: "清理旧数据"
+    lottery_max_active_per_user: "每用户最大活跃抽奖数"
+    lottery_require_trust_level: "创建抽奖所需信任等级"
+    lottery_allow_anonymous_participation: "允许匿名参与"
+  
+  lottery:
+    errors:
+      end_time_must_be_future: "截止时间必须晚于当前时间"
+      winner_count_exceeds_participants: "中奖人数不能超过最低参与人数"
+      invalid_post_format: "楼层号格式不正确"
+      creation_failed: "抽奖创建失败"
+      cannot_participate: "无法参与此次抽奖"
+      min_participants_too_low: "最低参与人数不能少于 %{min} 人"
+      insufficient_trust_level: "您的信任等级不足，需要达到 %{required} 级"
+      too_many_active_lotteries: "您同时进行的抽奖过多，最多允许 %{max} 个"
+      invalid_time_format: "时间格式不正确"
+      title_required: "请输入抽奖标题"
+      winner_count_invalid: "中奖人数必须大于0"
+      end_time_required: "请设置截止时间"
+      specific_posts_required: "请输入指定楼层"
+      specific_posts_format: "楼层号格式不正确，请输入数字，用逗号分隔"
+    
+    participate:
+      success: "参与成功"
+    
+    leave:
+      success: "已退出抽奖"
+      not_participating: "您尚未参与此次抽奖"
+    
+    draw:
+      failed: "开奖失败"
+    
+    results:
+      announcement: |
+        ## 🎉 【%{lottery_title}】开奖结果公布
+
+        恭喜以下 %{winner_count} 位用户获奖：
+
+        %{winners}
+
+        感谢大家的参与！
+    
+    pm:
+      winner_title: "🎉 恭喜中奖！"
+      winner_body: |
+        恭喜您在抽奖活动「%{lottery_title}」中获得第 %{position} 名！
+
+        点击查看详情：%{topic_url}
+
+        祝您好运！
+    
+    system_messages:
+      lottery_draw_failed:
+        title: "抽奖开奖失败"
+        subject_template: "抽奖 #%{lottery_id} 开奖失败"
+        text_body_template: |
+          抽奖活动「%{lottery_title}」（ID: %{lottery_id}）开奖时发生错误。
+
+          错误信息：%{error_message}
+
+          请检查系统日志获取详细信息。
+          
+      lottery_created:
+        title: "抽奖创建成功"
+        subject_template: "抽奖活动已创建"
+        text_body_template: |
+          您的抽奖活动「%{lottery_title}」已成功创建。
+
+          活动详情：
+          - 中奖人数：%{winner_count} 人
+          - 最低参与人数：%{min_participants} 人
+          - 截止时间：%{end_time}
+          - 抽奖方式：%{draw_type}
+
+          祝您的活动成功！
+  
+  logs:
+    lottery:
+      lottery_created: "创建了抽奖活动"
+      lottery_completed: "抽奖活动已完成"
+      lottery_cancelled: "抽奖活动已取消"
+      lottery_deleted: "删除了抽奖活动"
+      participant_joined: "用户参与了抽奖"
+      participant_left: "用户退出了抽奖"
+      manual_draw: "手动执行了开奖"
+      
+  jobs:
+    draw_lottery: "执行抽奖开奖"
+    lock_lottery_post: "锁定抽奖帖子"
+    notify_winners: "通知获奖者"
+    lottery_scheduler: "抽奖调度器"
+    create_lottery_from_post: "从帖子创建抽奖"
+    update_lottery_from_post: "从帖子更新抽奖"
+    
+  reviewables:
+    reasons:
+      lottery_spam: "抽奖垃圾信息"
+      lottery_inappropriate: "不当抽奖内容"
