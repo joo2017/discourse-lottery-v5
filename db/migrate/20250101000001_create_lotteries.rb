@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class CreateLotteries < ActiveRecord::Migration[7.0]
-  def change
+  def up
+    return if table_exists?(:lotteries)
+    
     create_table :lotteries do |t|
       t.references :post, null: false, foreign_key: true, index: true
       t.references :topic, null: false, foreign_key: true, index: true
@@ -37,5 +39,9 @@ class CreateLotteries < ActiveRecord::Migration[7.0]
     add_check_constraint :lotteries, "status IN ('active', 'completed', 'cancelled')", name: "lotteries_status_valid"
     add_check_constraint :lotteries, "draw_type IN ('random', 'specific_posts')", name: "lotteries_draw_type_valid"
     add_check_constraint :lotteries, "strategy_when_insufficient IN ('cancel', 'proceed')", name: "lotteries_strategy_valid"
+  end
+  
+  def down
+    drop_table :lotteries if table_exists?(:lotteries)
   end
 end
