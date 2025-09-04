@@ -1,0 +1,104 @@
+en:
+  site_settings:
+    lottery_enabled: "Enable lottery functionality"
+    lottery_min_participants_global: "Global minimum participants required for any lottery"
+    lottery_post_lock_delay_minutes: "Minutes after lottery creation before the post is locked (0 = immediate)"
+    lottery_excluded_groups: "User groups excluded from participating in lotteries"
+    lottery_cleanup_old_data: "Automatically cleanup lottery data older than 1 year"
+    lottery_max_active_per_user: "Maximum number of active lotteries per user"
+    lottery_require_trust_level: "Minimum trust level required to create lotteries"
+    lottery_allow_anonymous_participation: "Allow anonymous users to participate in lotteries"
+  
+  lottery:
+    errors:
+      end_time_must_be_future: "End time must be in the future"
+      winner_count_exceeds_participants: "Winner count cannot exceed minimum participants"
+      invalid_post_format: "Invalid post format"
+      creation_failed: "Failed to create lottery"
+      cannot_participate: "Cannot participate in this lottery"
+      min_participants_too_low: "Minimum participants cannot be less than %{min}"
+      insufficient_trust_level: "Your trust level is insufficient, level %{required} required"
+      too_many_active_lotteries: "Too many active lotteries, maximum %{max} allowed"
+      invalid_time_format: "Invalid time format"
+      title_required: "Please enter lottery title"
+      winner_count_invalid: "Winner count must be greater than 0"
+      end_time_required: "Please set end time"
+      specific_posts_required: "Please enter specific post numbers"
+      specific_posts_format: "Invalid post number format, please enter numbers separated by commas"
+    
+    participate:
+      success: "Successfully participated"
+    
+    leave:
+      success: "Left the lottery"
+      not_participating: "You are not participating in this lottery"
+    
+    draw:
+      failed: "Draw failed"
+    
+    results:
+      announcement: |
+        ## 🎉 【%{lottery_title}】Draw Results
+
+        Congratulations to the following %{winner_count} winners:
+
+        %{winners}
+
+        Thank you all for participating!
+    
+    pm:
+      winner_title: "🎉 Congratulations!"
+      winner_body: |
+        Congratulations! You won position %{position} in the lottery "%{lottery_title}"!
+
+        Click to view details: %{topic_url}
+
+        Good luck!
+    
+    system_messages:
+      lottery_draw_failed:
+        title: "Lottery draw failed"
+        subject_template: "Lottery #%{lottery_id} draw failed"
+        text_body_template: |
+          The lottery "%{lottery_title}" (ID: %{lottery_id}) failed to draw.
+
+          Error message: %{error_message}
+
+          Please check the system logs for more details.
+          
+      lottery_created:
+        title: "Lottery created successfully"
+        subject_template: "Lottery activity created"
+        text_body_template: |
+          Your lottery "%{lottery_title}" has been created successfully.
+
+          Activity details:
+          - Winners: %{winner_count}
+          - Minimum participants: %{min_participants}
+          - End time: %{end_time}
+          - Draw type: %{draw_type}
+
+          Good luck with your activity!
+  
+  logs:
+    lottery:
+      lottery_created: "Created lottery activity"
+      lottery_completed: "Lottery activity completed"
+      lottery_cancelled: "Lottery activity cancelled"
+      lottery_deleted: "Deleted lottery activity"
+      participant_joined: "User participated in lottery"
+      participant_left: "User left lottery"
+      manual_draw: "Manually executed draw"
+      
+  jobs:
+    draw_lottery: "Execute lottery draw"
+    lock_lottery_post: "Lock lottery post"
+    notify_winners: "Notify winners"
+    lottery_scheduler: "Lottery scheduler"
+    create_lottery_from_post: "Create lottery from post"
+    update_lottery_from_post: "Update lottery from post"
+    
+  reviewables:
+    reasons:
+      lottery_spam: "Lottery spam"
+      lottery_inappropriate: "Inappropriate lottery content"
