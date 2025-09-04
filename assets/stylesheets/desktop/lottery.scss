@@ -1,0 +1,246 @@
+// 桌面端特有样式
+.lottery-widget {
+  // 桌面端增大字体和间距
+  .lottery-title {
+    font-size: 1.3em;
+  }
+  
+  .lottery-details {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .lottery-actions {
+    .participate-btn {
+      padding: 12px 24px;
+      font-size: 1.1em;
+    }
+    
+    .participated-status {
+      .participated-text {
+        font-size: 1.05em;
+      }
+    }
+  }
+  
+  // 悬停效果
+  &:hover {
+    border-color: var(--primary-medium);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// 桌面端表单样式优化
+.lottery-entry-form {
+  .form-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    
+    &.two-columns {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .form-group {
+    input, textarea, select {
+      padding: 12px;
+      font-size: 1em;
+    }
+    
+    label {
+      font-size: 1.05em;
+    }
+  }
+  
+  .form-actions {
+    justify-content: center;
+    
+    .btn {
+      min-width: 120px;
+      padding: 12px 24px;
+    }
+  }
+}
+
+// 桌面端结果展示优化
+.lottery-results {
+  .winners-list {
+    .winner-item {
+      padding: 16px;
+      
+      &:hover {
+        background: var(--primary-very-low);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+      }
+      
+      .winner-emoji {
+        font-size: 2em;
+      }
+      
+      .winner-info {
+        .winner-position {
+          font-size: 1.1em;
+        }
+        
+        .winner-user {
+          font-size: 1.05em;
+        }
+      }
+    }
+  }
+  
+  .verification-info {
+    details {
+      summary {
+        font-size: 1.05em;
+        padding: 8px 0;
+        
+        &:hover {
+          background: var(--primary-very-low);
+          padding-left: 8px;
+          margin-left: -8px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
+
+// 桌面端倒计时样式
+.lottery-countdown {
+  padding: 16px;
+  
+  .countdown-icon {
+    font-size: 1.5em;
+  }
+  
+  .countdown-text {
+    font-size: 1.1em;
+    
+    .time-display {
+      font-size: 1.2em;
+    }
+  }
+}
+
+// 桌面端模态框优化
+.lottery-create-modal {
+  .modal-inner-container {
+    width: 600px;
+    max-width: 90vw;
+  }
+  
+  .modal-header {
+    padding: 20px 24px 16px;
+    
+    h3 {
+      font-size: 1.4em;
+    }
+  }
+  
+  .modal-body {
+    padding: 0 24px 24px;
+    max-height: 80vh;
+  }
+}
+
+// 桌面端工具提示
+.lottery-widget {
+  [data-tooltip] {
+    position: relative;
+    cursor: help;
+    
+    &:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary-very-high);
+      color: var(--secondary);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      white-space: nowrap;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:hover::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(1px);
+      border: 4px solid transparent;
+      border-top-color: var(--primary-very-high);
+      z-index: 1001;
+    }
+  }
+}
+
+// 桌面端动画效果
+.lottery-widget {
+  .participate-btn {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  .status-badge {
+    transition: all 0.2s ease;
+    
+    &.active {
+      animation: statusPulse 3s infinite;
+    }
+  }
+}
+
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+// 桌面端进度条动画
+.lottery-progress {
+  .progress-fill {
+    transition: width 0.5s ease;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      animation: progressShine 2s infinite;
+    }
+  }
+}
+
+@keyframes progressShine {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
