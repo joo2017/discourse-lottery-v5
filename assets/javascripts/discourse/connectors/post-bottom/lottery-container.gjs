@@ -3,6 +3,9 @@ import LotteryContainer from "./lottery-container";
 
 <template>
   {{#if this.shouldDisplay}}
-    <LotteryWidget @lottery={{this.lotteryData}} @topicId={{this.lotteryData.topic.id}} />
+    <LotteryWidget 
+      @lottery={{this.lotteryData}} 
+      @topicId={{this.topic.id}} 
+    />
   {{/if}}
 </template>
