@@ -1,5 +1,6 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { ajax } from "discourse/lib/ajax";
+import LotteryWidget from "../components/lottery-widget";
 
 export default {
   name: "extend-for-lottery",
@@ -12,9 +13,18 @@ export default {
     }
     
     withPluginApi("0.8.31", (api) => {
-      //
-      // 旧的 api.decorateWidget 调用已从此文件中【彻底删除】
-      //
+      // 扩展主题视图以显示抽奖组件
+      api.decorateWidget("post-contents:after-cooked", (helper) => {
+        const post = helper.getModel();
+        
+        if (post.get("firstPost") && post.topic.lottery) {
+          return helper.attach("lottery-widget", {
+            lottery: post.topic.lottery,
+            topicId: post.topic.id,
+            postId: post.id
+          });
+        }
+      });
       
       // 注册抽奖组件
       api.registerCustomPostMessageCallback("lottery", (topicController) => {
