@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class CreateLotteryWinners < ActiveRecord::Migration[7.0]
-  def change
+  def up
+    return if table_exists?(:lottery_winners)
+    
     create_table :lottery_winners do |t|
       t.references :lottery, null: false, foreign_key: true, index: true
       t.references :user, null: false, foreign_key: true, index: true
@@ -18,5 +20,9 @@ class CreateLotteryWinners < ActiveRecord::Migration[7.0]
     end
     
     add_check_constraint :lottery_winners, "position > 0", name: "lottery_winners_position_positive"
+  end
+  
+  def down
+    drop_table :lottery_winners if table_exists?(:lottery_winners)
   end
 end
