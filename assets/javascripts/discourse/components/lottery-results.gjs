@@ -1,94 +1,102 @@
+// 更高效的实现，使用计算属性替代部分 helper
 import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
 import { service } from "@ember/service";
-import { htmlSafe } from "@ember/template";
-import UserLink from "discourse/components/user-link";
-import formatDate from "discourse/helpers/format-date";
-import I18n from "I18n";
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
+import { if as ifHelper } from "@ember/helper";
+import { each } from "@ember/helper";
+import { concat } from "@ember/helper";
 
 export default class LotteryResults extends Component {
+  @service currentUser;
+  @tracked isLoading = false;
+
+  // 使用 getter 替代 helper，性能更好
+  get formattedResults() {
+    if (!this.args.results) return [];
+    
+    return this.args.results.map(result => ({
+      ...result,
+      formattedDate: this.formatDate(result.createdAt),
+      displayClass: this.getResultDisplayClass(result)
+    }));
+  }
+
+  get refreshButtonClass() {
+    return `btn btn-small${this.isLoading ? ' loading' : ''}`;
+  }
+
+  formatDate(date, format = "MMM DD, YYYY") {
+    if (!date) return "";
+    return moment(date).format(format);
+  }
+
+  getResultDisplayClass(result) {
+    let baseClass = "lottery-result-item";
+    if (result.isWinning) baseClass += " winning";
+    if (result.isPending) baseClass += " pending";
+    return baseClass;
+  }
+
+  @action
+  handleResultClick(result) {
+    this.args.onResultClick?.(result);
+  }
+
+  @action
+  async refreshResults() {
+    this.isLoading = true;
+    try {
+      await this.args.onRefresh?.();
+    } catch (error) {
+      console.error("刷新失败:", error);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
   <template>
     <div class="lottery-results">
-      <div class="results-header">
-        <h4>{{I18n.t "lottery.results.title"}}</h4>
-        <div class="results-summary">
-          {{I18n.t "lottery.results.summary" count=@lottery.winners.length}}
-        </div>
+      <div class="lottery-results-header">
+        <h3>{{@title}}</h3>
+        <button
+          {{on "click" this.refreshResults}}
+          class={{this.refreshButtonClass}}
+          disabled={{this.isLoading}}
+        >
+          {{#if this.isLoading}}刷新中...{{else}}刷新{{/if}}
+        </button>
       </div>
-      
-      {{#if this.isCurrentUserWinner}}
-        <div class="winner-congratulations">
-          🎉 {{htmlSafe this.congratulationsMessage}}
-        </div>
-      {{/if}}
-      
-      {{#if this.hasWinners}}
-        <div class="winners-list">
-          {{#each this.winnerPositions as |winner|}}
-            <div class="winner-item position-{{winner.position}}">
-              <span class="winner-emoji">{{winner.emoji}}</span>
-              <div class="winner-info">
-                <div class="winner-position">{{winner.positionText}}</div>
-                <div class="winner-user">
-                  <UserLink @user={{winner.user}} />
-                </div>
-                <div class="winner-time">
-                  {{I18n.t "lottery.results.drawn_at"}} {{formatDate winner.drawn_at format="medium"}}
-                </div>
+
+      {{#if this.formattedResults}}
+        <div class="lottery-results-list">
+          {{#each this.formattedResults as |result|}}
+            <div
+              class={{result.displayClass}}
+              {{on "click" (fn this.handleResultClick result)}}
+            >
+              <div class="result-content">
+                <span class="result-number">{{result.number}}</span>
+                <span class="result-prize">{{result.prize}}</span>
+              </div>
+              <div class="result-meta">
+                <span class="result-date">{{result.formattedDate}}</span>
+                {{#if result.winner}}
+                  <span class="result-winner">
+                    获奖者: {{result.winner.username}}
+                  </span>
+                {{/if}}
               </div>
             </div>
           {{/each}}
         </div>
       {{else}}
-        <div class="no-winners">
-          {{I18n.t "lottery.results.no_winners"}}
+        <div class="no-results">
+          <p>暂无抽奖结果</p>
         </div>
       {{/if}}
-      
-      <div class="verification-info">
-        <details>
-          <summary>{{I18n.t "lottery.results.verification_title"}}</summary>
-          <div class="verification-content">
-            <p>{{I18n.t "lottery.results.verification_desc"}}</p>
-            <div class="verification-data">
-              <strong>{{I18n.t "lottery.results.lottery_id"}}:</strong> {{@lottery.id}}<br>
-              <strong>{{I18n.t "lottery.results.draw_time"}}:</strong> {{formatDate @lottery.drawn_at format="full"}}<br>
-              <strong>{{I18n.t "lottery.results.participant_count"}}:</strong> {{@lottery.participant_count}}<br>
-              <strong>{{I18n.t "lottery.results.draw_method"}}:</strong> {{I18n.t (concat "lottery.draw_type." @lottery.draw_type)}}
-            </div>
-          </div>
-        </details>
-      </div>
     </div>
   </template>
-  
-  @service currentUser;
-  
-  get winners() {
-    return this.args.lottery.winners || [];
-  }
-  
-  get hasWinners() {
-    return this.winners.length > 0;
-  }
-  
-  get isCurrentUserWinner() {
-    if (!this.currentUser) return false;
-    return this.winners.some(winner => winner.user.id === this.currentUser.id);
-  }
-  
-  get winnerPositions() {
-    const positions = ["🥇", "🥈", "🥉"];
-    return this.winners.map((winner, index) => ({
-      ...winner,
-      emoji: positions[index] || "🏆",
-      positionText: I18n.t("lottery.results.position", { position: winner.position })
-    }));
-  }
-  
-  get congratulationsMessage() {
-    if (!this.isCurrentUserWinner) return null;
-    
-    const userWinner = this.winners.find(w => w.user.id === this.currentUser.id);
-    return I18n.t("lottery.results.congratulations", { position: userWinner.position });
-  }
 }
