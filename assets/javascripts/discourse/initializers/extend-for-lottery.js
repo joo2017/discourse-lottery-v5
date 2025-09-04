@@ -12,6 +12,10 @@ export default {
     }
     
     withPluginApi("0.8.31", (api) => {
+      //
+      // 旧的 api.decorateWidget 调用已从此文件中【彻底删除】
+      //
+      
       // 注册抽奖组件
       api.registerCustomPostMessageCallback("lottery", (topicController) => {
         const topicModel = topicController.get("model");
@@ -30,7 +34,7 @@ export default {
         
         if (composerModel.get("creatingTopic")) {
           return {
-            action: "insertLotteryBBCode", // <-- 这里是之前出错并已修正的地方
+            action: "insertLotteryBBCode",
             icon: "ticket-alt",
             label: "lottery.composer.add_lottery",
             condition: siteSettings.lottery_enabled
