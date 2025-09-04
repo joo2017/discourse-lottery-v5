@@ -1,0 +1,32 @@
+{
+  "name": "discourse-lottery-v5",
+  "version": "5.0.0",
+  "description": "A comprehensive lottery plugin for Discourse",
+  "keywords": ["discourse", "plugin", "lottery", "raffle"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-repo/discourse-lottery-v5.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "qunit test/javascripts/**/*-test.js",
+    "lint": "eslint assets/javascripts/",
+    "prettier": "prettier --write assets/javascripts/**/*.{js,gjs}",
+    "build": "echo 'Build process handled by Discourse'",
+    "dev": "echo 'Development server handled by Discourse'"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "qunit": "^2.0.0"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
+}
