@@ -1,0 +1,189 @@
+en:
+  js:
+    lottery:
+      title: "Lottery"
+      
+      status:
+        active: "Active"
+        completed: "Completed"
+        cancelled: "Cancelled"
+      
+      form:
+        title: "Lottery Title"
+        title_placeholder: "Enter lottery title"
+        description: "Description"
+        description_placeholder: "Describe the lottery activity (optional)"
+        prize_info: "Prize Information"
+        prize_info_placeholder: "Describe the prizes"
+        draw_type: "Draw Type"
+        winner_count: "Number of Winners"
+        specific_posts: "Specific Posts"
+        specific_posts_placeholder: "Enter post numbers, separated by commas, e.g: 5,10,15"
+        specific_posts_help: "Winners will be selected from users who posted on these specific post numbers"
+        min_participants: "Minimum Participants"
+        min_participants_help: "At least %{min} participants required to draw"
+        strategy_when_insufficient: "When Insufficient Participants"
+        end_time: "End Time"
+        create: "Create Lottery"
+        cancel: "Cancel"
+        calculated_winners: "Will select %{count} winners from specific posts"
+      
+      draw_type:
+        random: "Random Draw"
+        specific_posts: "Specific Posts"
+      
+      strategy:
+        cancel: "Cancel Lottery"
+        proceed: "Proceed Anyway"
+      
+      create:
+        title: "Create Lottery"
+        button: "Create Lottery"
+        success: "Lottery created successfully!"
+      
+      participate:
+        button: "Participate"
+        success: "Successfully participated!"
+        already_participated: "You have already participated in this lottery"
+      
+      leave:
+        button: "Leave"
+        success: "Left the lottery"
+        not_participating: "You are not participating in this lottery"
+      
+      countdown:
+        label: "Time Remaining"
+        expired: "Expired"
+        format_days: "%{days}d %{hours}h %{minutes}m"
+        format_hours: "%{hours}h %{minutes}m %{seconds}s"
+        format_minutes: "%{minutes}m %{seconds}s"
+      
+      results:
+        title: "🎉 Draw Results"
+        summary:
+          one: "1 Winner"
+          other: "%{count} Winners"
+        position: "Position %{position}"
+        congratulations: "Congratulations! You won position %{position}!"
+        drawn_at: "Drawn at:"
+        no_winners: "No winners"
+        verification_title: "Lottery Verification"
+        verification_desc: "This lottery uses verifiable random algorithms to ensure fairness."
+        lottery_id: "Lottery ID"
+        draw_time: "Draw Time"
+        participant_count: "Participants"
+        draw_method: "Draw Method"
+        announcement: |
+          ## 🎉 【%{lottery_title}】Draw Results
+
+          Congratulations to the following %{winner_count} winners:
+
+          %{winners}
+
+          Thank you all for participating!
+      
+      progress: "%{count} / %{min} participants"
+      participants: "Participants"
+      winner_count: "Winners"
+      prize_info: "Prize Info"
+      
+      cannot_participate: "Cannot participate in this lottery"
+      login_required: "Login to Participate"
+      no_lottery: "No lottery available"
+      
+      cancelled:
+        message: "Lottery cancelled (insufficient participants)"
+      
+      errors:
+        title_required: "Please enter lottery title"
+        winner_count_invalid: "Winner count must be greater than 0"
+        min_participants_too_low: "Minimum participants cannot be less than %{min}"
+        end_time_required: "Please set end time"
+        end_time_must_be_future: "End time must be in the future"
+        specific_posts_required: "Please enter specific post numbers"
+        specific_posts_format: "Invalid post number format, please enter numbers separated by commas"
+        cannot_participate: "Cannot participate in this lottery"
+        creation_failed: "Failed to create lottery"
+        winner_count_exceeds_participants: "Winner count cannot exceed minimum participants"
+        invalid_post_format: "Invalid post format"
+        invalid_time_format: "Invalid time format"
+        insufficient_trust_level: "Your trust level is insufficient, level %{required} required"
+        too_many_active_lotteries: "Too many active lotteries, maximum %{max} allowed"
+      
+      composer:
+        add_lottery: "Add Lottery"
+      
+      menu:
+        my_lotteries: "My Lotteries"
+      
+      pm:
+        winner_title: "🎉 Congratulations!"
+        winner_body: |
+          Congratulations! You won position %{position} in the lottery "%{lottery_title}"!
+
+          Click to view details: %{topic_url}
+
+          Good luck!
+      
+      admin:
+        title: "Lottery Management"
+        nav_label: "Lottery"
+        
+        settings:
+          enabled: "Enable Lottery Feature"
+          enabled_help: "Whether to allow users to create and participate in lotteries"
+          min_participants_global: "Global Minimum Participants"
+          min_participants_global_help: "Minimum participants required for all lotteries"
+          post_lock_delay_minutes: "Post Lock Delay (minutes)"
+          post_lock_delay_minutes_help: "How long after lottery creation before the post is locked (0 = immediate)"
+          excluded_groups: "Excluded Groups"
+          excluded_groups_help: "Select user groups that cannot participate in lotteries"
+          cleanup_old_data: "Cleanup Old Data"
+          cleanup_old_data_help: "Automatically cleanup lottery data older than 1 year"
+          max_active_per_user: "Max Active Lotteries Per User"
+          max_active_per_user_help: "Maximum number of active lotteries per user"
+          require_trust_level: "Required Trust Level to Create"
+          require_trust_level_help: "Minimum trust level required to create lotteries"
+          allow_anonymous_participation: "Allow Anonymous Participation"
+          allow_anonymous_participation_help: "Whether to allow anonymous users to participate"
+        
+        dashboard:
+          total_lotteries: "Total Lotteries"
+          active_lotteries: "Active"
+          completed_lotteries: "Completed"
+          total_participants: "Total Participants"
+          average_participants: "Average Participants"
+          success_rate: "Success Rate"
+        
+        list:
+          title: "Lottery List"
+          id: "ID"
+          title_col: "Title"
+          status: "Status"
+          creator: "Creator"
+          participants: "Participants"
+          winners: "Winners"
+          created_at: "Created"
+          end_time: "End Time"
+          actions: "Actions"
+          view: "View"
+          edit: "Edit"
+          delete: "Delete"
+          draw_now: "Draw Now"
+          cancel: "Cancel"
+          confirm_delete: "Are you sure you want to delete this lottery? This action cannot be undone."
+          confirm_cancel: "Are you sure you want to cancel this lottery?"
+          confirm_draw: "Are you sure you want to draw now?"
+          
+        filters:
+          all: "All"
+          active: "Active"
+          completed: "Completed"
+          cancelled: "Cancelled"
+          expired: "Expired"
+          
+        bulk_actions:
+          select_all: "Select All"
+          delete_selected: "Delete Selected"
+          cancel_selected: "Cancel Selected"
+          export_csv: "Export CSV"
